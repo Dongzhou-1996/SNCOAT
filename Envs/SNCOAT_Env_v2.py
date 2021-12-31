@@ -24,7 +24,7 @@ SCENES = [
 ]
 
 PROCESS_NUM = 5
-SCENES_DIR = '/home/group1/dzhou/SNCOAT/Scenes/'
+SCENES_DIR = '/home/group1/dzhou/SNCOAT/Scenes/eval'
 
 # action format: force in x, y, z axis, and yaw & pitch velocity
 DISCRETE_ACTIONS = np.array([
