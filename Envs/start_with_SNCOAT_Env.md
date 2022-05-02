@@ -67,4 +67,3 @@ $: python SNCOAT_Env_v2.py
 ```
 The running results have been recorded in './log/log_{thread_num}/SNCOAT_Env_v2/record'
 
-![Color01](./raw_materials/Color01.gif)  ![Color02](./raw_materials/Color02.gif)  ![Color03](./raw_materials/Color03.gif) 
