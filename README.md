@@ -47,26 +47,16 @@ We construct 18 scenes with different types of space non-cooperative object, inc
 [Get start with Simulated Env](https://github.com/Dongzhou-1996/SNCOAT/blob/main/Envs/start_with_SNCOAT_Env.md)
 
 
-
 # PBVS Baseline Algorithm
 The list of Trackers have been validated in our PBVS framework:
-- SiamRPN/SiamFC
-- ECO
-- KCF/MOSSE/CSK/DSST
-- DAT
-- STRCF
-- LDES
-- CSRDCF
-- BACF
-- SAMF
-- MKCFup
-- Staple/MCCTH-Staple
+- SiamRPN
+- SiamFC
+- KCF
 
 
 ## Run PBVS based on KCF Tracker
 
 ## Run PBVS based on SiamRPN Tracker
-
 
 
 # DRLAVT Algorithm
