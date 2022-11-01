@@ -1,6 +1,19 @@
 # SNCOAT
 Space Non-Cooperative Object Active Tracking, which means the spacecraft approach to an unknown target only with vision camera. We propose an end-to-end active visual tracking method based on deep Q-learning algorithm, named as DRLAVT. It can guide the chasing spacecraft approach to arbitrary space non-cooperative target merely relied on color or RGBD images, which significantly outperforms PBVS method. 
 
+See more details about SNCOAT benchmark in [Space Non-Cooperative Object Active Tracking With Deep Reinforcement Learning](https://doi.org/10.1109/TAES.2022.3211246).
+
+If you use our benchmark or related codes, please cite:
+```
+@article{zhou2022space,
+  title={Space Non-cooperative Object Active Tracking with Deep Reinforcement Learning},
+  author={Zhou, Dong and Sun, Guanghui and Lei, Wenxiao and Wu, Ligang},
+  journal={IEEE Transactions on Aerospace and Electronic Systems},
+  year={2022},
+  publisher={IEEE}
+}
+```
+
 **MORE SOURCE CODES ARE COMING SOON ...**
 
 ![Asteroid05](./raw_materials/SNCOAT_1639131425.2991836_original.gif) ![Asteroid06](./raw_materials/SNCOAT_1639556440.076119_original.gif) ![Satellite03](./raw_materials/SNCOAT_1639322351.9307878_original.gif)
