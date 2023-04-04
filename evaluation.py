@@ -881,44 +881,6 @@ if __name__ == '__main__':
         lstm_dim=512, lstm_layers=2
     )
 
-    # vanilla_drqn = DRQN(
-    #     log_dir='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_No/SNCOAT_Env_Velocity',
-    #     model_path='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_No/SNCOAT_Env_Velocity/model_ep_301.pth',
-    #     name='Vanilla_DRQN', state_type='Image', image_type='RGBD', action_type='Discrete', actuator_type='Velocity',
-    #     attention_type='No', data_augs=['No'],
-    #     action_dim=len(DISCRETE_ACTIONS), gpu_idx=args.gpu_idx, restore=True, is_training=False, with_SE=False,
-    #     lstm_dim=512, lstm_layers=2)
-    #
-    # vanilla_drqn_aug1 = DRQN(
-    #     log_dir='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_Crop_Rotate_Flip_Cutout/SNCOAT_Env_Velocity',
-    #     model_path='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_Crop_Rotate_Flip_Cutout/SNCOAT_Env_Velocity/model_ep_301.pth',
-    #     name='DRQN_Aug', state_type='Image', image_type='RGBD', action_type='Discrete', actuator_type='Velocity',
-    #     attention_type='No', data_augs=['Crop', 'Rotate', 'Flip', 'Cutout'],
-    #     action_dim=len(DISCRETE_ACTIONS), gpu_idx=args.gpu_idx, restore=True, is_training=False, with_SE=False,
-    #     lstm_dim=512, lstm_layers=2)
-    #
-    # vanilla_drqn_aug2 = DRQN(
-    #     log_dir='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_Crop_Flip/SNCOAT_Env_Velocity',
-    #     model_path='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_Crop_Flip/SNCOAT_Env_Velocity/model_ep_301.pth',
-    #     name='DRQN_Aug2', state_type='Image', image_type='RGBD', action_type='Discrete', actuator_type='Velocity',
-    #     attention_type='No', data_augs=['Crop', 'Flip'],
-    #     action_dim=len(DISCRETE_ACTIONS), gpu_idx=args.gpu_idx, restore=True, is_training=False, with_SE=False,
-    #     lstm_dim=512, lstm_layers=2)
-    #
-    # vanilla_drqn_mha = DRQN(
-    #     log_dir='train/log_Image_RGBD_Velocity_DRQN_attention_MHA_data_augs_No/SNCOAT_Env_Velocity',
-    #     model_path='train/log_Image_RGBD_Velocity_DRQN_attention_MHA_data_augs_No/SNCOAT_Env_Velocity/model_ep_301.pth',
-    #     name='DRQN_MHA', state_type='Image', image_type='RGBD', action_type='Discrete', actuator_type='Velocity', attention_type='MHA', data_augs=['No'],
-    #     action_dim=len(DISCRETE_ACTIONS), gpu_idx=args.gpu_idx, restore=True, is_training=False, with_SE=False, lstm_dim=512, lstm_layers=2
-    # )
-    #
-    #
-    # vanilla_drqn_se = DRQN(
-    #     log_dir='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_No_SE/SNCOAT_Env_Velocity',
-    #     model_path='train/log_Image_RGBD_Velocity_DRQN_attention_No_data_augs_No_SE/SNCOAT_Env_Velocity/model_ep_301.pth',
-    #     name='DRQN_SE', state_type='Image', image_type='RGBD', action_type='Discrete', actuator_type='Velocity', attention_type='No', data_augs=['No'],
-    #     action_dim=len(DISCRETE_ACTIONS), gpu_idx=args.gpu_idx, restore=True, is_training=False, with_SE=True, lstm_dim=512, lstm_layers=2
-    # )
     tracker = MonoTracker(mono_tracker_name='SiamRPN')
     pbvs_vel = PBVS(
         tracker, pos_ctrl_params=[-2, -0.1, -3],
@@ -926,20 +888,16 @@ if __name__ == '__main__':
         action_type='Continuous'
     )
 
-    # rand_agent = RandomAgent(action_type='Discrete')
+    rand_agent = RandomAgent(action_type='Discrete')
+    
     d_agents = [
-        # rand_agent,
-        # vanilla_drqn,
-        # vanilla_drqn_aug1,
-        # vanilla_drqn_aug2,
-        # vanilla_drqn_mha,
-        # vanilla_drqn_se,
+        rand_agent,
         ramavt_rgbd,
         ramavt_depth,
         ramavt_color,
-        # drlavt_rgbd,
-        # drlavt_depth,
-        # drlavt_color,
+        drlavt_rgbd,
+        drlavt_depth,
+        drlavt_color,
     ]
 
     c_agents = [
@@ -947,37 +905,14 @@ if __name__ == '__main__':
         drlavt_ddpg_depth,
     ]
 
-    # for agent in agents:
-    #     evaluator.eval_multi_checkpoints(agent, action_type='Discrete', actuator_type='Velocity',
-    #                                      max_episode_len=1000, image_blur=False, headless=True, overwrite=False,
-    #                                      actuator_noise=False, time_delay=False)
-    # evaluator.eval(c_agents, actuator_type='Velocity', action_type='Continuous', max_episode_len=1000, blur_level=2,
-    #                image_blur=False, headless=True, overwrite=True, actuator_noise=False, time_delay=False, vis=False)
-    # evaluator.eval(d_agents, actuator_type='Velocity', action_type='Discrete', max_episode_len=1000, blur_level=2,
-    #                image_blur=False, headless=True, overwrite=True, actuator_noise=False, time_delay=False, vis=False)
-    #
-    # c_agent_names = [agent.name for agent in c_agents]
-    # d_agent_names = [agent.name for agent in d_agents]
-    # agent_names = c_agent_names + d_agent_names
-    # evaluator.test_report(agent_names, actuator_type='Velocity')
+    evaluator.eval(c_agents, actuator_type='Velocity', action_type='Continuous', max_episode_len=1000, blur_level=2,
+                   image_blur=False, headless=True, overwrite=True, actuator_noise=False, time_delay=False, vis=False)
+    evaluator.eval(d_agents, actuator_type='Velocity', action_type='Discrete', max_episode_len=1000, blur_level=2,
+                   image_blur=False, headless=True, overwrite=True, actuator_noise=False, time_delay=False, vis=False)
+    
+    c_agent_names = [agent.name for agent in c_agents]
+    d_agent_names = [agent.name for agent in d_agents]
+    agent_names = c_agent_names + d_agent_names
+    evaluator.test_report(agent_names, actuator_type='Velocity')
 
-    result_dict = {
-        'Origin': 'train/result/Vanilla_DRQN/train',
-        'Augment': 'train/result/DRQN_Aug2/train',
-        'SE': 'train/result/DRQN_SE/train',
-        'MHA': 'train/result/DRQN_MHA/train',
-        'RAMAVT': 'train/result/RAMAVT_RGBD/train',
-    }
-
-    # result_dict = {
-        # 'DRLAVT_DQN_D': 'train/result/DRLAVT_Depth/train',
-        # 'DRLAVT_DQN_C': 'train/result/DRLAVT_Color/train',
-        # 'DRLAVT_DQN_R': 'train/result/DRLAVT_RGBD/train',
-        # 'DRLAVT_DDPG_D': 'train/result/DRLAVT_DDPG_Depth/train',
-        # 'RAMAVT_DRQN_D': 'train/result/RAMAVT_Depth/train',
-        # 'RAMAVT_Color': 'train/result/RAMAVT_Color/train',
-        # 'RAMAVT_DRQN_R': 'train/result/RAMAVT_RGBD/train',
-        # 'RAMAVT_DDPG_D': 'train/result/RAMAVT_DDPG_Depth/train'
-    # }
-
-    multi_trains_report(result_dict, report_dir='./train', actuator_type='Velocity', scene_num=3, plot=True)
+  
